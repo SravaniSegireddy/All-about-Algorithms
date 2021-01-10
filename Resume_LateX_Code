@@ -1,0 +1,248 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Deedy - One Page Two Column Resume
+% LaTeX Template
+% Version 1.2 (16/9/2014)
+%
+% Original author:
+% Debarghya Das (http://debarghyadas.com)
+%
+% Original repository:
+% https://github.com/deedydas/Deedy-Resume
+%
+% IMPORTANT: THIS TEMPLATE NEEDS TO BE COMPILED WITH XeLaTeX
+%
+% This template uses several fonts not included with Windows/Linux by
+% default. If you get compilation errors saying a font is missing, find the line
+% on which the font is used and either change it to a font included with your
+% operating system or comment the line out to use the default font.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% TODO:
+% 1. Integrate biber/bibtex for article citation under publications.
+% 2. Figure out a smoother way for the document to flow onto the next page.
+% 3. Add styling information for a "Projects/Hacks" section.
+% 4. Add location/address information
+% 5. Merge OpenFont and MacFonts as a single sty with options.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CHANGELOG:
+% v1.1:
+% 1. Fixed several compilation bugs with \renewcommand
+% 2. Got Open-source fonts (Windows/Linux support)
+% 3. Added Last Updated
+% 4. Move Title styling into .sty
+% 5. Commented .sty file.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Known Issues:
+% 1. Overflows onto second page if any column's contents are more than the
+% vertical limit
+% 2. Hacky space on the first bullet point on the second column.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[]{deedy-resume-openfont}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     LAST UPDATED DATE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lastupdated
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     TITLE NAME
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\namesection{Sravani}{Segireddy}
+{ \urlstyle{same}
+\href{https://www.linkedin.com/in/sravani-segireddy-075437105/}{LinkedIn} | 
+\href{https://github.com/SravaniSegireddy}{GitHub}\\
+\href{mailto:deedy@fb.com}{sravanisegireddy@gmail.com} | +65 91686090}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     COLUMN ONE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{minipage}[t]{0.33\textwidth} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     EDUCATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Education} 
+
+\subsection{VR Siddhartha College}
+\descript{BE in Computer Science}
+\location{Apr 2018 | AP, India}
+\location{CGPA - 9.46/10.0}
+\sectionsep
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     COURSEWORK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Technical Skills}
+
+\subsection{Coursework}
+\textbullet{} Data Structures And Algorithms \\
+\textbullet{} OS, DBMS and Computer Networks \\
+\textbullet{} Artificial Intelligence, IoT\\
+\textbullet{} Object Oriented Design \\
+\sectionsep
+
+\subsection{Programming Languages}
+C \textbullet{} Java \textbullet{} Python
+\sectionsep
+
+\subsection{Tools and techniques}
+\descript{Frameworks}
+Hibernate \textbullet{} Spring Boot \textbullet{} Apache Camel \textbullet{} Transformers \textbullet{} PyTorch \\
+\descript{Web}
+HTML \textbullet{} Angular \textbullet{} CSS \textbullet{} PHP Javascript \textbullet{} JQuery\\
+\descript{Others}
+Docker \textbullet{} Maven \textbullet{} Jenkins \textbullet{} ELK Openshift \textbullet{} Sonarcube \textbullet{} Dynatrace
+\sectionsep
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Achievements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Achievements}
+
+\descript{Fellowship}
+\textbullet{} Innovation Fellow on \textbf{Design Thinking} at \textbf{Stanford University} in collaboration with Google \\
+\textbullet{} \textbf{Invited to Google} Headquarters, California for Silicon Valley Meetup
+\sectionsep
+
+\descript{Others}
+\textbullet{} Won \textbf{prize of 50K INR} for DBS Innovative Chatbot challenge \\
+\textbullet{} Google \textbf{Kickstart},2020 Ranked average of 3300/10000 in all rounds\\
+\textbullet{} Facebook \textbf{HackerCup},2020 cleared Online Qualification round\\
+\textbullet{} \textbf{Appreciation Award} for best performance, DBS Bank \\
+\textbullet{} \textbf{Best Student Award} among 6 Universities in Andhra Pradesh \\
+\textbullet{} \textbf{Topper of batch 2018}, Best performance in Academics [100\% scholarship]\\
+\sectionsep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     COLUMN TWO
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{minipage} 
+\hfill
+\begin{minipage}[t]{0.66\textwidth} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     EXPERIENCE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experience}
+
+\runsubsection{Goldman Sachs}
+\descript{| Software Engineer }
+\location{Dec 2020 - Present | Singapore}
+\vspace{\topsep}
+\begin{tightemize}
+\item Designing a generic Automation Anywhere platform across the firm
+\end{tightemize}
+\sectionsep
+
+\runsubsection{DBS Bank}
+\descript{| Software Engineer }
+\location{july 2018 – Dec 2020 | Singapore, Hyderabad}
+\location{\textbf{Intelligent Processing of Communication}}
+% \vspace{\topsep} % Hacky fix for awkward extra vertical space
+\begin{tightemize}
+\item NLP \textbullet{} BERT Language Model \textbullet{} PyTorch \textbullet{} Flask
+\item Pretrained and Operationalized BERT model with DBS financial data to get a custom language model called \textbf{DBSBERT}. Outperformed the traditional BERT by \textbf{4 percent} accuracy in real-time Intent Classification
+\item Developed a self-serving application to train the models by uploading data and analyzing the results instantly
+\end{tightemize}
+
+\location{\textbf{Treasury and Markets RECONCILIATION}}
+% \vspace{\topsep} % Hacky fix for awkward extra vertical space
+\begin{tightemize}
+\item Spring Boot \textbullet{} MongoDB \textbullet{} ETL \textbullet{} Apache Camel \textbullet{} REST API \\ 
+\item Entity Extraction -> Matching Logic -> Report Generation 
+\item Managed \textbf{Millions} of real-time, batch deals using in-memory strategies through which latency of the computation from various data sources got diminished
+\end{tightemize}
+\sectionsep
+
+\runsubsection{ITS Planners and Engineers}
+\descript{| Software Engineering Intern }
+\location{Jan 2018 – June 2018 | Hyderabad, India}
+\begin{tightemize}
+\item Developed a \textbf{GPS Tracking} application for Traffic Management System to get the position of the vehicles which are connected with GPS Tracker
+\end{tightemize}
+\sectionsep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     RESEARCH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Research}
+\runsubsection{NIST, Odisha}
+\descript{| National Institute of Science and Technology }
+\location{Research Intern | May 2017 – July 2017 | Berhampur, India}
+\begin{tightemize}
+\item Worked under \textbf{\href{http://www.nist.edu/academics/BTech_CSE.html\#FACULTY}{Ranjit Behera}}, Developed a Simulation tool for the Assessment of Suitability of \textbf{FoG over Cloud} Computing in the context of IoT 
+\end{tightemize}
+\sectionsep
+
+\runsubsection{Publication}
+\descript{| Springer | Smart Computing and Informatics}
+\location{Wireless IoT based Intrusion Detection using LIDAR in the context of Intelligent Border Surveillance System}
+\begin{tightemize}
+\item Proximity Detection using \textbf{LIDAR} (Light Detection and Ranging) Sensor for the acquisition of object's distance within a range of 40 meters
+\end{tightemize}
+\sectionsep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     PUBLICATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Projects} 
+
+\runsubsection{Multilingual Chatbot}
+\location{| Aug 2020 – Dec 2020 | NLP, XLMR RoBERTa}
+\begin{tightemize}
+\item 
+A Chatbot supporting multiple Indian languages, understands user queries and provides appropriate responses with Named Entity Recognition
+\end{tightemize}
+\sectionsep
+
+
+\runsubsection{Order Netting System}
+\location{| Aug 2017 – Sep 2017 }
+\begin{tightemize}
+\item 
+System includes the functionalities of login profiles, order placing, netting of forex orders with settlement logic having BCNF normalized table design with Entity Relationship Diagram
+\end{tightemize}
+\sectionsep
+
+\runsubsection{P2P Chat Application}
+\location{| May 2016 – July 2016 | Computer Networks}
+\begin{tightemize}
+\item 
+A client-server based Chat Application written in Java using TCP socket programming to transfer the messages over the networks
+\sectionsep
+\end{tightemize}
+
+\end{minipage} 
+\end{document}  \documentclass[]{article}
