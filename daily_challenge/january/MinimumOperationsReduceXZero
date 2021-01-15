@@ -1,0 +1,29 @@
+class Solution {
+    public int minOperations(int[] arr, int x) {
+        int sum = 0; 
+        for(int val : arr)
+            sum += val;
+        sum -= x;
+        
+        if(sum < 0) return -1;
+        int res = -1;
+        int curSum = 0;
+        int start = 0;
+        for(int end = 0; end < arr.length ; end++){
+            curSum += arr[end];
+            
+            if(curSum > sum){
+                while(curSum > sum && start <= end){
+                    curSum -= arr[start++];
+                }
+            }
+            
+            if(curSum == sum){
+                res = Math.max(res, end-start+1);
+            }
+        }
+        return res == -1 ? -1 : arr.length-res;
+        
+    }
+    
+}
