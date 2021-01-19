@@ -1,0 +1,49 @@
+//interview bit graph
+
+public class Solution {
+    public String solve(int a, int b, int n, int r, int[] e, int[] f) {
+        b++;
+        a++;
+        int[][] arr = new int[b][a];
+        
+        for(int p = 0 ; p < n ; p++){
+            int x = e[p];
+            int y = f[p];
+            
+            // arr[y][x] = 1;
+            
+            for(int i = y-r; i <= y+r; i++){
+                for(int j = x-r; j <= x+r; j++){
+                    if(j < 0 || j >= a || i < 0 || i >= b) continue;
+                    
+                    if((i == y-r && j!= x) || (i == y+r && j!= x) ) continue;
+                    if(j == x-r ){
+                        if (i != y) continue;
+                    }
+                    if(j == x+r ){
+                        if (i != y) continue;
+                    }
+                    
+                    arr[i][j] = 1;
+                }
+            }
+            
+        }
+        
+        if (dfs(0,0,b,a,arr)) return "YES";
+        return "NO";
+        
+    }
+    
+    
+    boolean dfs(int i, int j, int rows, int cols, int[][] arr){
+        if(i == rows-1 && j == cols-1) return arr[i][j] == 0;
+        
+        if((i < 0 || i >= rows) || (j < 0 || j >= cols)) return false;
+        
+        if(arr[i][j] == 1 || arr[i][j] == -1) return false;
+        
+        arr[i][j] = -1;
+        return dfs(i+1,j,rows,cols, arr)|| dfs(i-1,j,rows,cols, arr) || dfs(i+1,j+1,rows,cols, arr)|| dfs(i+1,j-1,rows,cols, arr)||dfs(i-1,j-1,rows,cols, arr)||dfs(i-1,j+1,rows,cols, arr) || dfs(i,j+1,rows,cols, arr) || dfs(i,j-1,rows,cols, arr);
+    }
+}
