@@ -1,0 +1,26 @@
+class Solution {
+    public int maxOperations(int[] arr, int k) {
+        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+        
+        for(int i : arr){
+            hm.put(i, hm.getOrDefault(i,0)+1);
+        }
+        int count = 0;
+        for(int i : arr){
+            int val = k-i;
+            
+            if(hm.containsKey(i) && hm.containsKey(val)){
+                if(val == i && hm.get(i) < 2) continue;
+                count++;
+                hm.put(val, hm.get(val)-1);
+                if(hm.get(val) == 0) hm.remove(val);
+                
+                // System.out.println(i);
+                hm.put(i, hm.get(i)-1);
+                
+                if(hm.containsKey(i) && hm.get(i) == 0) hm.remove(i);
+            }
+        }
+        return count;
+    }
+}
