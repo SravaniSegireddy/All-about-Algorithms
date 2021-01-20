@@ -1,0 +1,36 @@
+//this solutin is not an optimal one
+
+class Solution {
+    public String longestPalindrome(String s1) {
+        StringBuilder sb= new StringBuilder(s1);
+        String s2 = sb.reverse().toString();
+        
+        int n = s1.length();
+        int dp[][] = new int[n+1][n+1];
+        int max = -1;
+        String res = "";
+        
+        for(int i = 1 ; i <= n ; i++){
+            for(int j = 1 ; j <= n ; j++){
+                if(s1.charAt(i-1) == s2.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1]+1;
+                    
+                    if(dp[i][j]>max)
+                    {
+                        String temp=s2.substring(j-dp[i][j],j);
+                        StringBuilder revtemp=new StringBuilder(temp);
+                        // System.out.println(temp);
+                        // System.out.println(revtemp.toString());
+                        if(revtemp.reverse().toString().equals(temp))
+                        {
+                            max=dp[i][j];
+                            res=temp;
+                        }
+                    }
+                }
+            }
+        }
+ 
+        return res;
+    }
+}
