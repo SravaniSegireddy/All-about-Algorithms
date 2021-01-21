@@ -1,0 +1,41 @@
+public class Solution {
+    public ArrayList<Integer> stepnum(int l, int h) {
+        
+        HashSet<Integer>  res = new HashSet<Integer>();
+        
+        
+        HashMap<Integer, ArrayList<Integer>> hm = new HashMap<Integer, ArrayList<Integer>>(); 
+        for(int i = 0; i <= 9; i++){
+            if(i!=0) hm.computeIfAbsent(i,v->new ArrayList<Integer>()).add(i-1);
+            if(i!=9) hm.computeIfAbsent(i,v->new ArrayList<Integer>()).add(i+1);
+        }
+        
+        int ld = String.valueOf(l).length();
+        int hd = String.valueOf(h).length();
+        
+        for(int d=(int)Math.min(ld, hd); d <= (int)Math.max(ld, hd); d++){
+            // System.out.println(d);
+            for(int i = 0 ; i <= 9 ; i++){
+                dfs(i, d, hm, l, h, res, 1);
+            }
+        }
+        ArrayList<Integer> op = new ArrayList<Integer>(res);
+        Collections.sort(op);
+        return op;
+    }
+    
+    static void dfs(int v, int n, HashMap<Integer, ArrayList<Integer>> hm, int l, int h, HashSet<Integer> res, int depth){
+        if(depth == n){
+            if(l <= v && v <= h)
+                res.add(v);
+        }
+        else{
+            int curr = v%10;
+            // System.out.println(v+" helllo "+curr);
+            for(int u: hm.get(curr)){
+                // System.out.println("hi "+u);
+                dfs((v*10)+u, n, hm, l, h, res, depth+1);
+            }
+        }
+    }
+}
