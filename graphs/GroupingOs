@@ -1,0 +1,42 @@
+public class Solution {
+    public void solve(ArrayList<ArrayList<Character>> a) {
+        
+        int m = a.get(0).size(); // cols
+        int n = a.size(); // rows
+        
+        for(int i = 0 ; i < n ; i++){
+            if(a.get(i).get(m-1) == 'O')
+                dfs(i,m-1, n,m,a);
+            if(a.get(i).get(0) == 'O')
+                dfs(i,0, n,m,a);
+                
+        }
+        
+        for(int i = 0 ; i < m ; i++){
+            if(a.get(0).get(i) == 'O')
+                dfs(0,i, n,m,a);
+            if(a.get(n-1).get(i) == 'O')
+                dfs(n-1,i, n,m,a);
+        }
+        
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(a.get(i).get(j) == '#')
+                    a.get(i).set(j,'O');
+                else a.get(i).set(j,'X');
+            }
+        }
+    }
+    
+    static void dfs(int i, int j, int n, int m, ArrayList<ArrayList<Character>> arr){
+        if(i< 0 || j < 0 || i > n-1 || j > m-1 || arr.get(i).get(j) != 'O') return;
+        
+        arr.get(i).set(j, '#');
+        
+        dfs(i+1,j,n,m,arr);
+        dfs(i-1,j,n,m,arr);
+        dfs(i,j+1,n,m,arr) ;
+        dfs(i,j-1,n,m,arr);
+        
+    }
+}
