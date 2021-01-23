@@ -1,0 +1,37 @@
+public class Solution {
+    public int exist(String[] s, String op) {
+        
+        int n = s.length;
+        int m = 0;
+        for(String tmp : s){
+            m = Math.max(m, tmp.length());
+        }
+        boolean[][] visited = new boolean[n][m];
+        
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < s[i].length() ; j++){
+                if(s[i].charAt(j) == op.charAt(0))
+                    if(dfs(0,0,s.length, s, visited, op, 0))
+                        return 1;
+            }
+        }
+        return 0;
+    }
+    
+    boolean dfs(int i, int j, int n, String[] s, boolean[][] visited, String op,int count){
+        if(i <0 || j < 0 || i >= n || j >= s[i].length()) return false;
+        if(visited[i][j]) return false;
+        if(count == op.length()-1 && s[i].charAt(j) == op.charAt(count)) return true;
+        if(count >= op.length()) return false;
+        if(s[i].charAt(j) != op.charAt(count)) return false;
+        
+        visited[i][j] = true;
+        if(dfs(i+1, j, n, s, visited, op, count+1)||
+        dfs(i-1, j, n, s, visited, op, count+1)||
+        dfs(i, j+1, n, s, visited, op, count+1)||
+        dfs(i, j-1, n, s, visited, op, count+1)) return true;
+        
+        visited[i][j] = false;
+        return false;
+    }
+}
