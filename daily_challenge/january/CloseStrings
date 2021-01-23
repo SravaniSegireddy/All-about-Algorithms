@@ -1,0 +1,44 @@
+class Solution {
+    public boolean closeStrings(String a, String b) {
+        if(a.length() != b.length()) return false;
+        // System.out.println(a.length()+" "+b.length());
+        HashMap<Character,Integer> hm = new HashMap<Character,Integer>();
+        HashMap<Character,Integer> hm2 = new HashMap<Character,Integer>();
+        for(int i = 0 ; i < a.length() ; i++){
+            char ch = a.charAt(i);
+            hm.put(ch, hm.getOrDefault(ch,0)+1);
+        }
+        // System.out.println("rec 2");
+        for(int i = 0 ; i < b.length() ; i++){
+            char ch = b.charAt(i);
+            if(!hm.containsKey(b.charAt(i))) return false;
+            hm2.put(ch, hm2.getOrDefault(ch,0)+1);
+        }
+        // System.out.println("rec 3");
+        ArrayList<Integer> arr1 = new ArrayList<Integer>();
+        ArrayList<Integer> arr2 = new ArrayList<Integer>();
+        
+        for(Map.Entry<Character, Integer> entry : hm.entrySet()){
+            int i = entry.getValue();
+            arr1.add(i);
+        }
+        
+        for(Map.Entry<Character, Integer> entry : hm2.entrySet()){
+            int i = entry.getValue();
+            arr2.add(i);
+        }
+        
+        if(arr1.size() != arr2.size()) return false;
+        // System.out.println("rec 4");
+        Collections.sort(arr1);
+        Collections.sort(arr2);
+        
+        // System.out.println(arr1.size());
+        for(int i = 0; i < arr1.size(); i++){
+            // System.out.println(arr1.get(i)+" "+arr2.get(i));
+            if((int)arr1.get(i) != (int)arr2.get(i)) return false;
+        }
+        
+        return true;
+    }
+}
