@@ -1,0 +1,43 @@
+class Solution {
+    public int[][] diagonalSort(int[][] arr) {
+        HashMap<String, ArrayList<Integer>> hm = new HashMap<String, ArrayList<Integer>>();
+        
+        int m = arr.length;
+        int n = arr[0].length;
+        int tmp_i = 0, tmp_j = 0;
+        
+        for(int i = 0 ; i< m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(i <= j){
+                  tmp_i = 0 ; tmp_j=j-i;  
+                } 
+                else{
+                    tmp_i = i-j ; tmp_j=0;
+                }
+                hm.computeIfAbsent(tmp_i+"_"+tmp_j, v->new ArrayList<Integer>()).add(arr[i][j]);
+            }
+        }
+        
+        for(Map.Entry<String, ArrayList<Integer>> entry : hm.entrySet()){
+            Collections.sort(entry.getValue());
+        }
+        
+        for(int i = 0 ; i< m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                if(i <= j){
+                  tmp_i = 0;tmp_j=j-i;  
+                } 
+                else{
+                    tmp_i = i-j;tmp_j=0;
+                }
+                if(i>=j)
+                    arr[i][j] = hm.get(tmp_i+"_"+tmp_j).get(j);
+                else
+                    arr[i][j] = hm.get(tmp_i+"_"+tmp_j).get(i);
+            }
+        }
+        
+        return arr;
+        
+    }
+}
