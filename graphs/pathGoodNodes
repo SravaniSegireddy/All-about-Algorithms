@@ -1,0 +1,38 @@
+public class Solution {
+    public int solve(int[] bool, int[][] arr, int c) {
+        HashMap<Integer, ArrayList<Integer>> hm = new HashMap<Integer, ArrayList<Integer>>();
+        
+        for(int[] i : arr){
+            hm.computeIfAbsent(i[0], v-> new ArrayList<Integer>()).add(i[1]);
+            hm.computeIfAbsent(i[1], v-> new ArrayList<Integer>()).add(i[0]);
+        }
+        
+        boolean visited[] = new boolean[bool.length];
+        
+        return dfs(hm,bool, c, 0, 1, visited);
+    }
+    
+    static int dfs(HashMap<Integer, ArrayList<Integer>> graph, int[] arr, int c, int count, int node, boolean[] visited){
+        if(count > c) return 0;
+        // System.out.println("reached");
+        if(arr[node-1] == 1) count++;
+        visited[node-1] = true;
+        
+        if(graph.get(node).size() != 1){
+            
+            int sum = 0;
+            
+            for(int v : graph.get(node)){
+                if(!visited[v-1]){
+                    sum += dfs(graph, arr, c, count, v, visited);
+                }
+            }
+            return sum;
+        }
+        else{
+            // System.out.println(node+" "+count);
+            return count<= c ? 1 : 0;
+        }
+        
+    }
+}
