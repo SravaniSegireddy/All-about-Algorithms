@@ -1,0 +1,38 @@
+public class Solution {
+    static int gMax;
+    public int solve(int[] arr) {
+        
+        HashMap<Integer,ArrayList<Integer>> hm = new HashMap<Integer,ArrayList<Integer>>();
+        
+        int root = 0;
+        for(int i  =0 ; i < arr.length ; i++){
+            if(arr[i]!= -1)
+                hm.computeIfAbsent(arr[i], v->new ArrayList<Integer>()).add(i);
+            else root = i;
+        }
+        
+        gMax = 0;
+        dfs(hm, root, 0);
+        
+        return gMax;
+    
+    }
+    
+    static int dfs(HashMap<Integer,ArrayList<Integer>> hm, int root, int count){
+        if(!hm.containsKey(root)){
+            return count+1;
+        }
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        for(int v : hm.get(root)){
+            arr.add(dfs(hm, v, count+1)-count);
+        }
+        
+        Collections.sort(arr, Collections.reverseOrder());
+        
+        if(arr.size() == 0) return 0;
+        
+        gMax = Math.max(gMax,arr.size() > 1 ? (arr.get(0)+arr.get(1)-2) : arr.get(0)-1);
+        return arr.get(0)+count;
+
+    }
+}
