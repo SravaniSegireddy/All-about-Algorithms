@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] arr) {
+        if(arr.length == 0) return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(arr.length, new MySort());
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            if(arr[i] != null) pq.add(arr[i]);
+        }
+        
+        // System.out.println(pq.size());
+        
+        ListNode head = null,tmp = null;
+        while(!pq.isEmpty()){
+            ListNode node = pq.remove();
+            if(head == null){
+                head = node;tmp = node;
+            }
+            else {
+                tmp.next = node ; tmp = tmp.next;
+            }
+            if(node.next != null) pq.add(node.next);
+            // System.out.println(pq.size());
+        }
+        
+        return head;
+    }
+}
+
+class MySort implements Comparator<ListNode>{
+    
+    public int compare(ListNode o1, ListNode o2) { 
+        if (o1.val <= o2.val) 
+            return -1; 
+        else
+            return 1; 
+    } 
+}
