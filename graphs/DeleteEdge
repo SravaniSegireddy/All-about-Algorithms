@@ -1,0 +1,59 @@
+public class Solution {
+    long gmax = 0;
+    int M = 1000000007;
+    public int deleteEdge(int[] w, int[][] arr) {
+        HashMap<Integer, ArrayList<Integer>> hm = new HashMap<Integer, ArrayList<Integer>>();
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            hm.computeIfAbsent(arr[i][0], v-> new ArrayList<Integer>()).add(arr[i][1]);
+            hm.computeIfAbsent(arr[i][1], v-> new ArrayList<Integer>()).add(arr[i][0]);
+        }
+        
+        boolean visited[] = new boolean[w.length];
+        
+        long total = getTotal(hm, 1,w, visited);
+        
+        visited = new boolean[w.length];
+        gmax = 0;
+        dfs(hm, 1, w, visited, total);
+        
+        return (int)gmax%M;
+    }
+    
+    long dfs(HashMap<Integer, ArrayList<Integer>> hm, int node, int[] w, boolean[] visited, long total){
+        if(hm.get(node).size() == 1){
+            long prod = (w[node-1]%M * (total - w[node-1])%M)%M;
+            gmax = Math.max(gmax, prod);
+            return w[node-1];
+        }
+        visited[node-1] = true;
+        
+        long val = w[node-1];
+        for(int v : hm.get(node)){
+            if(!visited[v-1]){
+                val += dfs(hm,v,w,visited,total);
+            }
+        }
+        
+        gmax = Math.max(gmax, val%M * (total-val)%M)%M;
+        return val;
+    }
+    
+    long getTotal(HashMap<Integer, ArrayList<Integer>> hm, int node, int[] w, boolean[] visited){
+         if(hm.get(node).size() == 1){
+             return w[node-1];
+         }
+         long val = w[node-1];
+         visited[node-1] = true;
+         for(int v : hm.get(node)){
+            
+            if(!visited[v-1]){
+                // System.out.println(v);
+                val += getTotal(hm,v,w,visited);
+            }
+        }
+        return val;
+    }
+    
+    
+}
