@@ -1,0 +1,64 @@
+class Solution {
+    int[] dr = new int[]{-1,1,0,0};
+    int[] dc = new int[]{0,0,-1,1};
+    int m, n;
+    
+    public int minimumEffortPath(int[][] h) {
+        
+        m = h.length;
+        n = h[0].length;
+        if(m==1 && n == 1) return 0;
+        boolean[][] visited = new boolean[m][n];
+        
+        int l = 0, r = Integer.MIN_VALUE;
+        
+        for(int i =0 ; i < m ; i++){
+            for(int j = 0 ; j < n ; j++){
+                r = Math.max(h[i][j],r);
+            }
+        }
+        
+        int min = Integer.MAX_VALUE;
+        
+        while(l <= r){
+            
+            int mid = l + (r-l)/2;
+            visited = new boolean[m][n];
+            
+            if(dfs(h,visited, 0,0,h[0][0], mid)){
+                min = Math.min(min, mid);
+                r = mid-1;
+            }
+            
+            else l = mid+1; 
+        }
+        
+        return min;
+        
+    }
+    
+    boolean dfs(int[][] arr, boolean[][] visited, int i, int j, int parent, int k){
+        
+        visited[i][j] = true;
+        
+        
+        
+        for(int p = 0 ; p < 4 ; p++){
+            int tmpi = i+dr[p];
+            int tmpj = j+dc[p];
+            
+            if(tmpi>= 0 && tmpj >= 0 && tmpi < m && tmpj < n && !visited[tmpi][tmpj] && Math.abs(arr[i][j]-arr[tmpi][tmpj]) <= k){
+                 if(tmpi == m-1 && tmpj == n-1) return true;
+                 if(dfs(arr, visited, tmpi ,tmpj,arr[i][j], k))
+                    return true;
+            }
+           
+        }
+        // visited[i][j] = false;
+        
+        return false;
+    }
+    
+    
+    
+}
