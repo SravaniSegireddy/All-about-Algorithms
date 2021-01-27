@@ -1,0 +1,33 @@
+public class Solution {
+    public int solve(int n, int[][] arr) {
+        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            graph.computeIfAbsent(arr[i][0], v-> new ArrayList<Integer>()).add(arr[i][1]);
+        }
+        
+        HashSet<Integer> visited = null;
+        
+        for(int i = 1; i <= n ; i++){
+             visited = new HashSet<Integer>();
+             if(isCycle(graph, visited, i))
+                return 1;
+        }
+        return 0;
+    }
+    
+    boolean isCycle(HashMap<Integer, ArrayList<Integer>> graph, HashSet<Integer> visited , int node){
+        if(!graph.containsKey(node)) return false;
+        
+        visited.add(node);
+        
+        for(int v : graph.get(node)){
+            if(visited.contains(v)) return true;
+            if(isCycle(graph, visited, v)) return true;
+        }
+        
+        visited.remove(node);
+        
+        return false;
+    }
+}
