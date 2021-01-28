@@ -1,0 +1,33 @@
+public class Solution {
+    public int solve(int n, int[][] arr) {
+        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
+        
+        for(int i = 0 ; i < arr.length ;i++){
+            graph.computeIfAbsent(arr[i][0], v-> new ArrayList<Integer>()).add(arr[i][1]);
+            graph.computeIfAbsent(arr[i][1], v-> new ArrayList<Integer>()).add(arr[i][0]);
+        }
+        
+        int[] color = new int[n+1];
+
+        for(int col = 1 ; col <= n; col++){
+            if(color[col] == 0 && !recur(graph, col, color, 0)) return 0;
+        }
+        
+        return 1;
+    }
+    
+    boolean recur(HashMap<Integer, ArrayList<Integer>> graph, int node, int[] color, int col){
+        
+        if(!graph.containsKey(node)) return true;
+        if(color[node] != 0) return color[node] == col;
+        
+        color[node] = col;
+        
+        for(int v : graph.get(node)){
+            if(!recur(graph, v, color, col^1)) return false;
+        }
+        
+        return true;
+    }
+    
+}
