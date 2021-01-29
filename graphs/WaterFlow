@@ -1,0 +1,50 @@
+public class Solution {
+    
+    int[] dx = new int[]{-1,1,0,0};
+    int[] dy = new int[]{0,0,-1,1};
+    
+    public int solve(int[][] arr) {
+        int n = arr.length;
+        int m = arr[0].length;
+        
+        boolean[][] b = new boolean[n][m];
+        boolean[][] a = new boolean[n][m];
+        
+        
+        for(int i = 0 ; i < n ; i++){
+            if(!b[i][0]) dfs(arr, i, 0 , arr[i][0], b);
+        }
+        
+        for(int j = 0 ; j < m ; j++){
+            if(!b[0][j]) dfs(arr, 0, j , arr[0][j], b);
+        }
+    
+        for(int i = 0 ; i < n ; i++){
+            if(!a[i][m-1]) dfs(arr, i, m-1 , arr[i][m-1], a);
+        }
+        
+        for(int j = 0 ; j < m ; j++){
+            if(!a[n-1][j]) dfs(arr, n-1, j , arr[n-1][j], a);
+        }
+        
+        int count = 0; 
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(a[i][j] && b[i][j]) count++;
+            }
+        }
+        
+        return count;
+    }
+    
+    void dfs(int[][] arr, int i, int j, int parent, boolean[][] op){
+        if(i < 0 || j < 0 || i >= arr.length || j >= arr[0].length) return;
+        if(op[i][j] || arr[i][j] < parent) return;
+        
+        op[i][j] = true;
+        
+        for(int p = 0 ; p < 4 ; p++){
+            dfs(arr, dx[p]+i, dy[p]+j, arr[i][j], op);
+        }
+    }
+}
