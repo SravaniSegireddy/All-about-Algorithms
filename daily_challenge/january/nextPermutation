@@ -1,0 +1,51 @@
+class Solution {
+    public void nextPermutation(int[] arr) {
+          int n = arr.length;
+          if(isDescending(arr)){
+              int start = 0; 
+              int end = n-1;
+              while(start < end){
+                  swap(arr,start,end);
+                  start++;end--;
+              }
+          }
+         else{
+             int left = 0;
+             for(int i = n-1; i > 0; i--){
+                 if(arr[i] > arr[i-1]){
+                     left = i-1;break;
+                 }
+             }
+             int right = left+1;
+             for(int i = left+2; i < n; i++){
+                 if(arr[left] < arr[i]){
+                     if(arr[right] >= arr[i])
+                         right = i;
+                 }       
+             }
+             // System.out.println(left+" "+right);
+             swap(arr, left, right);
+             
+             int start = left+1; 
+             int end = n-1;
+              while(start < end){
+                  swap(arr,start,end);
+                  start++;end--;
+              }
+         }
+            
+    }
+    
+    void swap(int[] arr, int start, int end){
+        int tmp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = tmp;
+    }
+    
+    boolean isDescending(int[] arr){
+        for(int i = 0 ; i < arr.length-1 ; i++){
+            if(arr[i] < arr[i+1]) return false;
+        }
+        return true;
+    }
+}
