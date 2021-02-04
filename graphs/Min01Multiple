@@ -1,0 +1,33 @@
+public class Solution {
+
+    public String multiple(int n) {
+        
+        if(n==1) return "1";
+        
+        Queue<Integer> q  = new LinkedList<Integer>();
+        q.add(1);
+        
+        String[] dist = new String[n];
+        // System.out.println(dist[0]);
+        dist[1] = "1";
+        
+        while(!q.isEmpty()){
+            int curr = q.remove();
+            if(curr == 0) return dist[curr];
+            for(int val : Arrays.asList(0,1)){
+                int tmp = (curr *10+val)%n;
+                
+                
+                if(dist[tmp] == null){
+                    q.add(tmp);
+                    dist[tmp] = dist[curr]+ String.valueOf(val);
+                }
+                
+            }
+            
+        }
+        
+        return "";
+    
+    }
+}
