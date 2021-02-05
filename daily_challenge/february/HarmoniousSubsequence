@@ -1,0 +1,32 @@
+class Solution {
+    public int findLHS(int[] arr) {
+        Arrays.sort(arr);
+        
+        TreeMap<Integer, Integer> tm = new TreeMap<Integer, Integer>();
+        for(int ele : arr){
+            tm.put(ele, tm.getOrDefault(ele,0)+1);
+        }
+        
+        int curr = 0;
+        int prev = 0;
+        boolean isFirst = true;
+        int max = 0;
+        
+        for(Map.Entry entry : tm.entrySet()){
+            curr = (int)entry.getKey();
+            
+            if(isFirst){
+                prev = curr;
+                isFirst = false;
+            } 
+            else{
+                if(curr-prev == 1){
+                    max = Math.max(max, tm.get(curr)+tm.get(prev));
+                }
+                prev= curr;
+            }
+        }
+        
+        return max;
+    }
+}
