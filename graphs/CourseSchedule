@@ -1,0 +1,36 @@
+public class Solution {
+    public int solve(int a, ArrayList<Integer> b, ArrayList<Integer> c) {
+        HashMap<Integer, ArrayList<Integer>> hm = new HashMap<Integer, ArrayList<Integer>>();
+        
+        for(int i = 0 ; i < b.size(); i++){
+            hm.computeIfAbsent(c.get(i), v-> new ArrayList<Integer>()).add(b.get(i));
+        }
+        
+        HashSet<Integer> visited = new HashSet<Integer>();
+        HashSet<Integer> completed = new HashSet<Integer>();
+        for(int i = 1 ; i <= a ; i++){
+            if(!hm.containsKey(i)) completed.add(i);
+        }
+        
+        for(int i = 1; i <= a ; i++){
+            if(hm.containsKey(i)){
+                if(!dfs(i, hm, visited, completed)) return 0;
+            }
+            
+        }
+        
+        return 1;
+    }
+    
+    
+    boolean dfs(int curr, HashMap<Integer, ArrayList<Integer>> hm, HashSet<Integer> visited, HashSet<Integer> completed){
+        visited.add(curr);
+        for(int v : hm.get(curr)){
+            if(completed.contains(v)) continue;
+            if(visited.contains(v)) return false;
+            if(!dfs(v, hm, visited, completed)) return false;
+        }
+        completed.add(curr);
+        return true;
+    }
+}
